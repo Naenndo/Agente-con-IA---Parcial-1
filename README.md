@@ -52,11 +52,11 @@ flowchart TD
 | Nodo | Qué hace | Cuándo se usa | Lee | Escribe |
 |------|----------|---------------|-----|---------|
 | OpenAI Chat Model (gpt-5-mini) | Modelo de lenguaje que genera las respuestas del agente | Siempre, para procesar la entrada del usuario y decidir qué herramienta usar | No | No |
-| Simple Memory | Memoria de ventana que conserva el contexto de la conversación | Cuando es necesario recordar parte del historial reciente | No | No |
+| Simple Memory | Memoria de ventana que conserva el contexto de la conversación | Cuando es necesario recordar parte del historial reciente | Sí (memoria) | Sí (memoria) |
 | generar_folio | Genera un folio único con formato TD-XXXX | Justo antes de crear cada nueva reservación | No | No |
-| ObtenerMenu | Consulta el menú completo del restaurante (platillos, bebidas, postres, precios, descripción, alérgenos y disponibilidad) | Cuando el usuario pregunta qué hay para comer o pide recomendaciones | No | No |
+| ObtenerMenu | Consulta el menú completo del restaurante (platillos, bebidas, postres, precios, descripción, alérgenos y disponibilidad) | Cuando el usuario pregunta qué hay para comer o pide recomendaciones | Sí (Sheets) | No |
 | Crear_reservacion | Crea una reservación en Google Calendar con folio generado automáticamente | Cuando el usuario confirma una reservación con fecha, hora y número de personas | No | Sí (Calendar) |
-| Consultar_reservaciones | Consulta reservaciones existentes en un rango de fechas | Cuando el usuario quiere consultar su reservación ya hecha | No | No |
+| Consultar_reservaciones | Consulta reservaciones existentes en un rango de fechas | Cuando el usuario quiere consultar su reservación ya hecha | Sí (Calendar) | No |
 | Enviar_Correo | Envía un correo de confirmación por Gmail | Después de crear la reservación en el calendario | No | Sí (Gmail) |
 
 **Nota importante: No hay tools de modificar o cancelar reservaciones.** El agente solo puede crear nuevas reservaciones y consultar las existentes. Para modificar o cancelar, se indica al usuario que contacte al personal directamente.
