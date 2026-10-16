@@ -50,8 +50,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.2,
       "position": [
-        -64,
-        272
+        -208,
+        512
       ],
       "credentials": {
         "googlePalmApi": {
@@ -230,6 +230,32 @@
           "name": "Gmail account"
         }
       }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -16,
+        240
+      ],
+      "id": "9b0d56a7-37c2-4455-a930-49932eea51fc",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
     }
   ],
   "pinData": {},
@@ -258,13 +284,7 @@
     },
     "Google Gemini Chat Model": {
       "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Simple Memory": {
@@ -332,6 +352,17 @@
           }
         ]
       ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -343,7 +374,7 @@
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": false
   },
-  "versionId": "b06ac056-7fc6-45da-b5dc-c0597292d26d",
+  "versionId": "b090fb42-d750-4c50-abe2-f14bd6f00ac8",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "08bd4a560220cc25f07ac4938069f625588eca55fa46af3fe9522a843e88958f"
