@@ -45,7 +45,7 @@ flowchart TD
     GC -->|Gmail| AI
 ```
 
-*Captura del workflow en evidencias/workflow.png*
+*El diagrama de arriba representa el workflow. También se puede incluir una captura de pantalla del workflow en `evidencias/workflow.png` (opcional).*
 
 ## Tabla de tools
 
