@@ -19,7 +19,7 @@ flowchart TD
     AI -->|Respuesta| Send[Send a text message]
     
     subgraph Herramientas
-        GF[Google Gemini Chat Model]
+        GF[OpenAI Chat Model gpt-5-mini]
         SM[Simple Memory]
         FG[generar_folio]
         OM[ObtenerMenu]
@@ -51,7 +51,7 @@ flowchart TD
 
 | Nodo | Qué hace | Cuándo se usa | Lee | Escribe |
 |------|----------|---------------|-----|---------|
-| Google Gemini Chat Model | Modelo de lenguaje que genera las respuestas del agente | Siempre, para procesar la entrada del usuario y decidir qué herramienta usar | No | No |
+| OpenAI Chat Model (gpt-5-mini) | Modelo de lenguaje que genera las respuestas del agente | Siempre, para procesar la entrada del usuario y decidir qué herramienta usar | No | No |
 | Simple Memory | Memoria de ventana que conserva el contexto de la conversación | Cuando es necesario recordar parte del historial reciente | No | No |
 | generar_folio | Genera un folio único con formato TD-XXXX | Justo antes de crear cada nueva reservación | No | No |
 | ObtenerMenu | Consulta el menú completo del restaurante (platillos, bebidas, postres, precios, descripción, alérgenos y disponibilidad) | Cuando el usuario pregunta qué hay para comer o pide recomendaciones | No | No |
@@ -65,7 +65,7 @@ flowchart TD
 
 | Capa | Tecnología | Por qué se eligió |
 |------|------------|-------------------|
-| Modelo | Google Gemini | Asistente conversacional natural en español, integrado n8n |
+| Modelo | OpenAI gpt-5-mini | Modelo conversacional rápido y económico, integrado en n8n vía AI Agent |
 | Memoria | Simple Memory (Buffer Window) | Mantiene contexto de conversación a corto plazo en la misma sesión |
 | Datos | Google Calendar + Google Sheets | Calendar para reservaciones con folios, Sheets para menú consultable |
 | Canal | Telegram | Comunicación directa con el cliente en su plataforma de mensajería |
@@ -75,7 +75,7 @@ flowchart TD
 
 1. **Credenciales a crear:**
    - **Telegram bot:** Crear un bot con @BotFather y obtener el token
-   - **Google Gemini:** Configurar credenciales en n8n para el modelo de lenguaje
+   - **OpenAI:** Configurar la API key en n8n para el nodo OpenAI Chat Model (gpt-5-mini)
    - **Google OAuth para Calendar, Sheets y Gmail:** Configurar OAuth2 en n8n (en modo Testing, el token caduca a los 7 días)
 
 2. **Estructura de la hoja del menú:** La hoja de Google Sheets debe tener las columnas: Platillo, Categoría, Precio, Descripción, Alérgenos, Disponible (como el archivo menu_tortolitos.csv incluido)
@@ -89,6 +89,12 @@ flowchart TD
 6. **Consideraciones para Telegram en n8n local:** Es necesario una URL pública con HTTPS (puede usar ngrok o similar) para que el webhook de Telegram funcione correctamente. El bot token debe configurarse en las credenciales de n8n.
 
 7. **Limitaciones de Testing:** El token OAuth de Google en modo Testing caduca a los 7 días, después hay que regenerar las credenciales.
+
+## Casos de prueba y evidencias
+
+Los 10 casos de prueba y sus resultados están en `casos.csv` (4 happy_path, 2 borde, 1 memoria, 1 escritura y 2 fuera de alcance). Las capturas de cada ejecución en Telegram están en `evidencias/caso-01.png` a `evidencias/caso-10.png`.
+
+Para reproducirlos: abre una conversación con el bot en Telegram, envía la `entrada` de cada caso del CSV y compara la respuesta con el `comportamiento_esperado`, llenando las columnas `respuesta_obtenida`, `tool_usada` y `pasa`.
 
 ## Limitaciones conocidas
 
